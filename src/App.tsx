@@ -1,31 +1,24 @@
-import React from "react";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import UpdateEnterprise from './pages/UpdateEnterprise';
+import CreateEnterprise from './pages/CreateEnterprise';
+import DeleteEnterprise from './pages/DeleteEnterprise';
+import CreateEmployee from './pages/CreateEmployee';
 
-import logo from "./logo.svg";
-import "./App.css";
 
-import { useHelloWorldQuery } from "./generated/graphql";
-
-const App = () => {
-  const { data, loading } = useHelloWorldQuery();
-
+function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        {!loading && data && (
-          <div>
-            <p>
-              <code>{data?.helloWorld}</code>
-            </p>
-            <p className="App-description">
-              If you can see this, the setup with the API was made successfuly.
-              Now it's up to you. Good luck ☘️
-            </p>
-          </div>
-        )}
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/edit/:id" element={<UpdateEnterprise />} />
+        <Route path="/create" element={<CreateEnterprise />} />
+        <Route path="/delete/:id" element={<DeleteEnterprise />} />
+        <Route path="/enterprise/:id/new-employee" element={<CreateEmployee />} />
+      </Routes>
+    </Router>
   );
-};
+}
 
 export default App;
